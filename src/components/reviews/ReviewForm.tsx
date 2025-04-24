@@ -44,18 +44,53 @@ export function ReviewForm({ dishId, onReviewAdded }: ReviewFormProps) {
     setIsLoading(true);
 
     try {
-      const { data, error } = await supabase.from("reviews").insert({
-        dish_id: dishId,
-        user_id: user.id,
-        rating,
-        notes: notes.trim() || null,
-      }).select();
+      // Check if user already has a review for this dish
+      const { data: existingReview } = await supabase
+        .from("reviews")
+        .select()
+        .eq("dish_id", dishId)
+        .eq("user_id", user.id)
+        .single();
+
+      let data;
+      let error;
+
+      if (existingReview) {
+        // Update existing review
+        const result = await supabase
+          .from("reviews")
+          .update({
+            rating,
+            notes: notes.trim() || null,
+          })
+          .eq("id", existingReview.id)
+          .select();
+        
+        data = result.data;
+        error = result.error;
+      } else {
+        // Create new review
+        const result = await supabase
+          .from("reviews")
+          .insert({
+            dish_id: dishId,
+            user_id: user.id,
+            rating,
+            notes: notes.trim() || null,
+          })
+          .select();
+        
+        data = result.data;
+        error = result.error;
+      }
 
       if (error) throw error;
 
       toast({
-        title: "Recensione Aggiunta",
-        description: "La tua recensione è stata aggiunta con successo",
+        title: existingReview ? "Recensione Aggiornata" : "Recensione Aggiunta",
+        description: existingReview 
+          ? "La tua recensione è stata aggiornata con successo"
+          : "La tua recensione è stata aggiunta con successo",
       });
 
       // Reset form
