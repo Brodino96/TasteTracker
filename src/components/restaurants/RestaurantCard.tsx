@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Restaurant } from "@/types";
+import { Pencil } from "lucide-react";
 
 interface RestaurantCardProps {
   restaurant: Restaurant;
@@ -32,10 +33,15 @@ export function RestaurantCard({ restaurant }: RestaurantCardProps) {
           {restaurant.description || "No description available."}
         </p>
       </CardContent>
-      <CardFooter className="p-4 pt-0">
-        <Link to={`/restaurants/${restaurant.id}`} className="w-full">
+      <CardFooter className="p-4 pt-0 flex gap-2">
+        <Link to={`/restaurants/${restaurant.id}`} className="flex-1">
           <Button variant="default" className="w-full">
-            View Dishes
+            Guarda Piatti
+          </Button>
+        </Link>
+        <Link to={`/restaurants/${restaurant.id}/edit`}>
+          <Button variant="outline" size="icon">
+            <Pencil className="h-4 w-4" />
           </Button>
         </Link>
       </CardFooter>
