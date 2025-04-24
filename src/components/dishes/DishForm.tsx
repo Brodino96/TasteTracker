@@ -63,7 +63,7 @@ export function DishForm() {
 
         if (uploadError) {
           toast({
-            title: "Errore nel caricamento dell'immagine",
+            title: "Errore nell'upload dell'immagine",
             description: "Impossibile uploadare l'immagine. Perfavore riprovare più tardi o contattare il supporto.",
             variant: "destructive",
           });

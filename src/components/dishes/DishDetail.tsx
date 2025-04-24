@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, Upload } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ReviewList } from "@/components/reviews/ReviewList";
@@ -8,8 +8,11 @@ import { ReviewForm } from "@/components/reviews/ReviewForm";
 import { StarRating } from "@/components/reviews/StarRating";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { Dish, Restaurant, Review } from "@/types";
+import { v4 as uuidv4 } from 'uuid';
 
 export function DishDetail() {
   const { restaurantId, dishId } = useParams<{ restaurantId: string; dishId: string }>();
@@ -17,7 +20,11 @@ export function DishDetail() {
   const [restaurant, setRestaurant] = useState<Restaurant | null>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
+  const [uploading, setUploading] = useState(false);
   const [averageRating, setAverageRating] = useState<number | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const { toast } = useToast();
+  const { user } = useAuth();
 
   useEffect(() => {
     async function fetchData() {
@@ -69,12 +76,100 @@ export function DishDetail() {
     fetchData();
   }, [restaurantId, dishId]);
 
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file || !dishId) return;
+
+    if (!user) {
+      toast({
+        title: "Errore di Autenticazione",
+        description: "Devi essere loggato per poter aggiornare l'immagine del piatto.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (dish?.created_by !== user.id) {
+      toast({
+        title: "Permesso Negato",
+        description: "Solo il creatore del piatto può modificare la sua immagine.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    try {
+      setUploading(true);
+
+      // Delete old image if exists
+      if (dish?.image_url) {
+        const oldPath = dish.image_url.split('/images/').pop();
+        if (oldPath) {
+          await supabase.storage
+            .from('images')
+            .remove([oldPath]);
+        }
+      }
+
+      // Upload new image to Supabase Storage
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${uuidv4()}.${fileExt}`;
+      const filePath = `dishes/${fileName}`;
+      const { error: uploadError } = await supabase.storage
+        .from('images')
+        .upload(filePath, file);
+
+      if (uploadError) throw uploadError;
+
+      // Get public URL
+      const { data: { publicUrl } } = supabase.storage
+        .from('images')
+        .getPublicUrl(filePath);
+
+      // Update dish record with new image URL
+      const { error: updateError } = await supabase
+        .from('dishes')
+        .update({ image_url: publicUrl })
+        .eq('id', dishId);
+
+      if (updateError) throw updateError;
+
+      // Update local state
+      setDish(prev => prev ? { ...prev, image_url: publicUrl } : null);
+
+      // Show success message
+      toast({
+        title: "Immagine Aggiornata",
+        description: "L'immagine del piatto è stata aggiornata con successo."
+      });
+    } catch (error: any) {
+      console.error('Error uploading image:', error);
+      toast({
+        title: "Upload Fallito",
+        description: error.message || "Upload dell'immagine fallito. Per favore prova di nuovo.",
+        variant: "destructive"
+      });
+    } finally {
+      setUploading(false);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
+  };
+
   const handleReviewAdded = (newReview: Review) => {
-    setReviews((prev) => [newReview, ...prev]);
+    setReviews((prev) => {
+      // Remove the old review if it exists (in case of an update)
+      const filteredReviews = prev.filter(review => review.user_id !== newReview.user_id);
+      return [newReview, ...filteredReviews];
+    });
     
-    // Recalculate average rating
-    const totalRating = [...reviews, newReview].reduce((sum, review) => sum + review.rating, 0);
-    setAverageRating(totalRating / (reviews.length + 1));
+    // Recalculate average rating with the updated reviews list
+    setReviews(currentReviews => {
+      const totalRating = currentReviews.reduce((sum, review) => sum + review.rating, 0);
+      setAverageRating(totalRating / currentReviews.length);
+      return currentReviews;
+    });
   };
 
   if (!restaurantId || !dishId) return null;
@@ -114,6 +209,25 @@ export function DishDetail() {
                     <span className="text-muted-foreground">Nessuna immagine disponibile</span>
                   </div>
                 )}
+              </div>
+              <div className="mt-4">
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  className="hidden"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                />
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  className="w-full"
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={uploading}
+                >
+                  <Upload className="mr-2 h-4 w-4" />
+                  {uploading ? 'Uploading...' : 'Change Image'}
+                </Button>
               </div>
             </div>
             <div className="md:w-1/2 space-y-4">
