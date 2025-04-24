@@ -55,12 +55,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) throw error;
       toast({
-        title: "Welcome back!",
-        description: "You've successfully signed in.",
+        title: "Ben tornato!",
+        description: "Log in eseguito con successo.",
       });
     } catch (error: any) {
       toast({
-        title: "Error signing in",
+        title: "Log in fallito",
         description: error.message,
         variant: "destructive",
       });
@@ -73,12 +73,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const { error } = await supabase.auth.signUp({ email, password });
       if (error) throw error;
       toast({
-        title: "Account created",
-        description: "You've successfully created an account.",
+        title: "Account creato",
+        description: "Hai creato un account con successo.",
       });
     } catch (error: any) {
       toast({
-        title: "Error creating account",
+        title: "Creazione account fallita",
         description: error.message,
         variant: "destructive",
       });
@@ -91,12 +91,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
       toast({
-        title: "Signed out",
-        description: "You've been signed out successfully.",
+        title: "Logged out",
+        description: "Hai effettuato il log out con successo.",
       });
     } catch (error: any) {
       toast({
-        title: "Error signing out",
+        title: "Log out fallito",
         description: error.message,
         variant: "destructive",
       });
