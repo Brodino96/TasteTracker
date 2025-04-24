@@ -29,7 +29,7 @@ export function DishCard({ dish, restaurantId }: DishCardProps) {
         <CardTitle className="line-clamp-1">{dish.name}</CardTitle>
         {dish.price && (
           <CardDescription className="font-medium">
-            ${dish.price.toFixed(2)}
+            {dish.price.toFixed(2)}€
           </CardDescription>
         )}
       </CardHeader>

@@ -130,7 +130,7 @@ export function DishDetail() {
               </div>
 
               {dish.price && (
-                <p className="text-lg font-medium">${dish.price.toFixed(2)}</p>
+                <p className="text-lg font-medium">{dish.price.toFixed(2)}€</p>
               )}
               
               <p className="text-muted-foreground">
