@@ -10,6 +10,7 @@ import { RestaurantDetailPage } from "@/pages/RestaurantDetailPage";
 import { AddRestaurantPage } from "@/pages/AddRestaurantPage";
 import { AddDishPage } from "@/pages/AddDishPage";
 import { DishDetailPage } from "@/pages/DishDetailPage";
+import { EditRestaurantPage } from "@/pages/EditRestaurantPage";
 import { ThemeProvider } from "./components/theme-provider";
 
 function App() {
@@ -50,6 +51,15 @@ function App() {
                 } 
               />
               
+              <Route 
+                path="restaurants/:id/edit" 
+                element={
+                  <ProtectedRoute>
+                    <EditRestaurantPage />
+                  </ProtectedRoute>
+                } 
+              />
+
               <Route 
                 path="restaurants/:restaurantId/dishes/new" 
                 element={
