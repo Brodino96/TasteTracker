@@ -50,7 +50,7 @@ export function ReviewList({ reviews }: ReviewListProps) {
   if (reviews.length === 0) {
     return (
       <div className="text-center py-6">
-        <p className="text-muted-foreground">No reviews yet. Be the first to review!</p>
+        <p className="text-muted-foreground">Ancora nessuna recensione. Sii il primo a recensire!</p>
       </div>
     );
   }
@@ -59,7 +59,7 @@ export function ReviewList({ reviews }: ReviewListProps) {
     <div className="space-y-4">
       {reviews.map((review) => {
         const userInitial = users[review.user_id]?.email?.charAt(0).toUpperCase() || "?";
-        const userEmail = users[review.user_id]?.email || "Anonymous";
+        const userEmail = users[review.user_id]?.email || "Anonimo";
         const reviewDate = new Date(review.created_at);
         
         return (

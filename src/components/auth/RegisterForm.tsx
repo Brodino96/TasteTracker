@@ -30,8 +30,8 @@ export function RegisterForm() {
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
-        <CardTitle className="text-2xl">Create an account</CardTitle>
-        <CardDescription>Enter your email below to create your account</CardDescription>
+        <CardTitle className="text-2xl">Crea un account</CardTitle>
+        <CardDescription>Inserisci la tua email per creare il tuo account</CardDescription>
       </CardHeader>
       <form onSubmit={handleSignUp}>
         <CardContent className="space-y-4">
@@ -57,7 +57,7 @@ export function RegisterForm() {
               onChange={(e) => setPassword(e.target.value)}
             />
             <p className="text-xs text-muted-foreground">
-              Password must be at least 6 characters long
+              La password deve essere di almeno 6 caratteri
             </p>
           </div>
         </CardContent>
@@ -70,9 +70,9 @@ export function RegisterForm() {
             {isLoading ? "Creating account..." : "Create account"}
           </Button>
           <div className="text-sm text-center text-muted-foreground">
-            Already have an account?{" "}
+            Hai già un account?{" "}
             <Link to="/signin" className="text-primary underline-offset-4 hover:underline">
-              Sign in
+              Log In
             </Link>
           </div>
         </CardFooter>

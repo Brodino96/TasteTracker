@@ -19,7 +19,7 @@ export function RestaurantCard({ restaurant }: RestaurantCardProps) {
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-secondary/20">
-            <span className="text-muted-foreground">No image</span>
+            <span className="text-muted-foreground">Nessun immagine</span>
           </div>
         )}
       </div>

@@ -19,19 +19,19 @@ export function Navbar() {
           {user ? (
             <>
               <Link to="/restaurants">
-                <Button variant="ghost">Restaurants</Button>
+                <Button variant="ghost">Ristoranti</Button>
               </Link>
               <Button onClick={signOut} variant="ghost">
-                Sign Out
+                Log Out
               </Button>
             </>
           ) : (
             <>
               <Link to="/signin">
-                <Button variant="ghost">Sign In</Button>
+                <Button variant="ghost">Log In</Button>
               </Link>
               <Link to="/signup">
-                <Button variant="outline">Sign Up</Button>
+                <Button variant="outline">Registrati</Button>
               </Link>
             </>
           )}

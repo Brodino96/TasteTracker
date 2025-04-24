@@ -72,13 +72,13 @@ export function DishList() {
         <div>
           <Link to="/restaurants" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-2">
             <ChevronLeft className="mr-1 h-4 w-4" />
-            Back to restaurants
+            Ritorna ai ristoranti
           </Link>
           <h2 className="text-3xl font-bold tracking-tight">
             {loading ? (
               <Skeleton className="h-9 w-64" />
             ) : (
-              restaurant?.name || "Restaurant"
+              restaurant?.name || "Ristoranti"
             )}
           </h2>
           {!loading && restaurant?.address && (
@@ -88,7 +88,7 @@ export function DishList() {
         <Link to={`/restaurants/${restaurantId}/dishes/new`}>
           <Button>
             <PlusCircle className="mr-2 h-4 w-4" />
-            Add Dish
+            Aggiunti piatto
           </Button>
         </Link>
       </div>
@@ -115,14 +115,14 @@ export function DishList() {
         </div>
       ) : (
         <div className="text-center py-10">
-          <h3 className="text-lg font-semibold mb-2">No dishes yet</h3>
+          <h3 className="text-lg font-semibold mb-2">Ancora nessun piatto</h3>
           <p className="text-muted-foreground mb-6">
-            Add the first dish to this restaurant
+            Aggiungi il primo piatto a questo ristorante
           </p>
           <Link to={`/restaurants/${restaurantId}/dishes/new`}>
             <Button>
               <PlusCircle className="mr-2 h-4 w-4" />
-              Add Dish
+              Aggiungi piatto
             </Button>
           </Link>
         </div>

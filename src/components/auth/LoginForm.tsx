@@ -30,8 +30,8 @@ export function LoginForm() {
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
-        <CardTitle className="text-2xl">Sign In</CardTitle>
-        <CardDescription>Enter your email to sign in to your account</CardDescription>
+        <CardTitle className="text-2xl">Log In</CardTitle>
+        <CardDescription>Inserisci la tua email per fare il log in con il tuo account</CardDescription>
       </CardHeader>
       <form onSubmit={handleSignIn}>
         <CardContent className="space-y-4">
@@ -68,9 +68,9 @@ export function LoginForm() {
             {isLoading ? "Signing in..." : "Sign In"}
           </Button>
           <div className="text-sm text-center text-muted-foreground">
-            Don"t have an account?{" "}
+            Non hai un account?{" "}
             <Link to="/signup" className="text-primary underline-offset-4 hover:underline">
-              Sign up
+              Registrati
             </Link>
           </div>
         </CardFooter>

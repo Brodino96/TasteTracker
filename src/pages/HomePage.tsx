@@ -12,22 +12,22 @@ export function HomePage() {
         <div className="max-w-3xl mx-auto">
           <Utensils className="h-16 w-16 mb-6 mx-auto text-primary" />
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">
-            Track Your Favorite Dishes
+            Traccia i Tuoi Piatti Preferiti
           </h1>
           <p className="text-xl text-muted-foreground mb-8">
-            Create reviews, share opinions, and discover new favorites with your friends.
+            Crea Recensioni, condividi opinioni e scopri nuovi piatti preferiti con i tuoi amici.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             {user ? (
               <>
                 <Link to="/restaurants">
                   <Button size="lg" className="w-full sm:w-auto">
-                    Browse Restaurants
+                    Cerca Ristoranti
                   </Button>
                 </Link>
                 <Link to="/restaurants/new">
                   <Button size="lg" variant="outline" className="w-full sm:w-auto">
-                    Add a Restaurant
+                    Aggiungi Ristorante
                   </Button>
                 </Link>
               </>
@@ -35,12 +35,12 @@ export function HomePage() {
               <>
                 <Link to="/signin">
                   <Button size="lg" className="w-full sm:w-auto">
-                    Sign In
+                    Log In
                   </Button>
                 </Link>
                 <Link to="/signup">
                   <Button size="lg" variant="outline" className="w-full sm:w-auto">
-                    Create Account
+                    Crea Account
                   </Button>
                 </Link>
               </>
@@ -51,33 +51,33 @@ export function HomePage() {
       
       <section className="bg-muted py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">Come Funziona</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto mb-4">
                 1
               </div>
-              <h3 className="text-xl font-semibold mb-2">Add Restaurants</h3>
+              <h3 className="text-xl font-semibold mb-2">Aggiungi Ristorante</h3>
               <p className="text-muted-foreground">
-                Start by adding your favorite restaurants to the collection.
+                Inizia con l'aggiungere i tuoi ristoranti preferiti.
               </p>
             </div>
             <div className="text-center">
               <div className="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto mb-4">
                 2
               </div>
-              <h3 className="text-xl font-semibold mb-2">Track Dishes</h3>
+              <h3 className="text-xl font-semibold mb-2">Traccia i piatti</h3>
               <p className="text-muted-foreground">
-                Add individual dishes with descriptions and photos.
+                Aggiungi piatti individualmente con descrizioni e fotografie.
               </p>
             </div>
             <div className="text-center">
               <div className="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto mb-4">
                 3
               </div>
-              <h3 className="text-xl font-semibold mb-2">Rate & Review</h3>
+              <h3 className="text-xl font-semibold mb-2">Vota & Recensisci</h3>
               <p className="text-muted-foreground">
-                Give ratings from 1-10 stars and add notes about your experience.
+                Dai voti tra 1-10 stelle e aggiungi note sulla tua esperienza.
               </p>
             </div>
           </div>

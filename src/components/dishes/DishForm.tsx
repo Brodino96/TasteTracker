@@ -27,8 +27,8 @@ export function DishForm() {
     
     if (!user) {
       toast({
-        title: "Authentication error",
-        description: "You must be logged in to add a dish",
+        title: "Errore di autenticazione",
+        description: "Devi essere loggato per aggiungere un piatto",
         variant: "destructive",
       });
       return;
@@ -63,8 +63,8 @@ export function DishForm() {
 
         if (uploadError) {
           toast({
-            title: "Image upload failed",
-            description: "Unable to upload image. Please try again later or contact support.",
+            title: "Errore nel caricamento dell'immagine",
+            description: "Impossibile uploadare l'immagine. Perfavore riprovare più tardi o contattare il supporto.",
             variant: "destructive",
           });
           throw new Error("Image upload failed");
@@ -93,15 +93,15 @@ export function DishForm() {
       if (error) throw error;
 
       toast({
-        title: "Dish added",
-        description: "Your dish has been added successfully",
+        title: "Piatto aggiunto",
+        description: "Il tuo piatto è stato aggiunto con successo",
       });
 
       // Navigate back to restaurant page
       navigate(`/restaurants/${restaurantId}`);
     } catch (error: any) {
       toast({
-        title: "Error adding dish",
+        title: "Aggiunta piatto fallita",
         description: error.message,
         variant: "destructive",
       });
@@ -113,15 +113,15 @@ export function DishForm() {
   return (
     <Card className="max-w-2xl mx-auto">
       <CardHeader>
-        <CardTitle>Add Dish</CardTitle>
+        <CardTitle>Aggiungi piatto</CardTitle>
         <CardDescription>
-          Add a new dish to the restaurant
+          Aggiungi un nuovo piatto al ristorante
         </CardDescription>
       </CardHeader>
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="name">Dish Name</Label>
+            <Label htmlFor="name">Nome Piatto</Label>
             <Input
               id="name"
               value={name}
@@ -131,7 +131,7 @@ export function DishForm() {
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="description">Description</Label>
+            <Label htmlFor="description">Descrizione</Label>
             <Textarea
               id="description"
               value={description}
@@ -141,7 +141,7 @@ export function DishForm() {
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="price">Price (Optional)</Label>
+            <Label htmlFor="price">Prezzo (Opzionale)</Label>
             <Input
               id="price"
               type="number"
@@ -154,7 +154,7 @@ export function DishForm() {
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="image">Dish Image</Label>
+            <Label htmlFor="image">Immagine Piatto</Label>
             <Input
               id="image"
               type="file"
@@ -166,7 +166,7 @@ export function DishForm() {
               }}
             />
             <p className="text-xs text-muted-foreground">
-              Upload an image of the dish (optional)
+              Carica un immagine del piatto (Opzionale)
             </p>
           </div>
         </CardContent>

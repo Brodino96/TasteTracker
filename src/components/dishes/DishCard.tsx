@@ -21,7 +21,7 @@ export function DishCard({ dish, restaurantId }: DishCardProps) {
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-secondary/20">
-            <span className="text-muted-foreground">No image</span>
+            <span className="text-muted-foreground">Nessuna immagine</span>
           </div>
         )}
       </div>

@@ -84,7 +84,7 @@ export function DishDetail() {
       <div>
         <Link to={`/restaurants/${restaurantId}`} className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-2">
           <ChevronLeft className="mr-1 h-4 w-4" />
-          Back to {restaurant?.name || "restaurant"}
+          Ritorna a {restaurant?.name || "ristorante"}
         </Link>
       </div>
 
@@ -111,7 +111,7 @@ export function DishDetail() {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
-                    <span className="text-muted-foreground">No image available</span>
+                    <span className="text-muted-foreground">Nessuna immagine disponibile</span>
                   </div>
                 )}
               </div>
@@ -141,7 +141,7 @@ export function DishDetail() {
               
               <Card>
                 <CardContent className="p-4">
-                  <h3 className="font-medium text-lg mb-4">Add Your Review</h3>
+                  <h3 className="font-medium text-lg mb-4">Aggiungi la tua Recensione</h3>
                   <ReviewForm dishId={dishId} onReviewAdded={handleReviewAdded} />
                 </CardContent>
               </Card>
@@ -151,19 +151,19 @@ export function DishDetail() {
           <Separator className="my-6" />
           
           <div>
-            <h3 className="text-xl font-semibold mb-4">Reviews</h3>
+            <h3 className="text-xl font-semibold mb-4">Recensioni</h3>
             <ReviewList reviews={reviews} />
           </div>
         </div>
       ) : (
         <div className="text-center py-12">
-          <h3 className="text-lg font-semibold mb-2">Dish not found</h3>
+          <h3 className="text-lg font-semibold mb-2">Piatto non trovato</h3>
           <p className="text-muted-foreground mb-6">
-            This dish may have been removed
+            Questo piatto potrebbe esser stato rimosso o non esiste.
           </p>
           <Link to={`/restaurants/${restaurantId}`}>
             <Button>
-              Return to Restaurant
+              Ritorna ai ristoranti
             </Button>
           </Link>
         </div>

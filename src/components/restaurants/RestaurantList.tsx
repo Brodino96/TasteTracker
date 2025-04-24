@@ -34,11 +34,11 @@ export function RestaurantList() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-3xl font-bold tracking-tight">Restaurants</h2>
+        <h2 className="text-3xl font-bold tracking-tight">Ristoranti</h2>
         <Link to="/restaurants/new">
           <Button>
             <PlusCircle className="mr-2 h-4 w-4" />
-            Add Restaurant
+            Aggiungi Ristorante
           </Button>
         </Link>
       </div>
@@ -65,14 +65,14 @@ export function RestaurantList() {
         </div>
       ) : (
         <div className="text-center py-10">
-          <h3 className="text-lg font-semibold mb-2">No restaurants yet</h3>
+          <h3 className="text-lg font-semibold mb-2">Ancora nessun ristorante</h3>
           <p className="text-muted-foreground mb-6">
-            Add your first restaurant to get started
+            Aggiungi il primo ristorante per iniziare
           </p>
           <Link to="/restaurants/new">
             <Button>
               <PlusCircle className="mr-2 h-4 w-4" />
-              Add Restaurant
+              Aggiungi ristorante
             </Button>
           </Link>
         </div>

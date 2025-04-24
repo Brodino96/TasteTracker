@@ -25,8 +25,8 @@ export function ReviewForm({ dishId, onReviewAdded }: ReviewFormProps) {
     
     if (!user) {
       toast({
-        title: "Authentication error",
-        description: "You must be logged in to add a review",
+        title: "Errore di autenticazione",
+        description: "Devi essere loggato per aggiungere una recensione",
         variant: "destructive",
       });
       return;
@@ -34,8 +34,8 @@ export function ReviewForm({ dishId, onReviewAdded }: ReviewFormProps) {
 
     if (rating === 0) {
       toast({
-        title: "Rating required",
-        description: "Please select a rating",
+        title: "Voto richiesto",
+        description: "Per favore, vota questo piatto",
         variant: "destructive",
       });
       return;
@@ -54,8 +54,8 @@ export function ReviewForm({ dishId, onReviewAdded }: ReviewFormProps) {
       if (error) throw error;
 
       toast({
-        title: "Review added",
-        description: "Your review has been added successfully",
+        title: "Recensione Aggiunta",
+        description: "La tua recensione è stata aggiunta con successo",
       });
 
       // Reset form
@@ -68,7 +68,7 @@ export function ReviewForm({ dishId, onReviewAdded }: ReviewFormProps) {
       }
     } catch (error: any) {
       toast({
-        title: "Error adding review",
+        title: "Aggiunta recensione fallita",
         description: error.message,
         variant: "destructive",
       });
@@ -80,7 +80,7 @@ export function ReviewForm({ dishId, onReviewAdded }: ReviewFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-2">
-        <Label>Your Rating</Label>
+        <Label>Il tuo voto</Label>
         <div className="flex items-center">
           <StarRating
             rating={rating}
@@ -95,12 +95,12 @@ export function ReviewForm({ dishId, onReviewAdded }: ReviewFormProps) {
       </div>
       
       <div className="space-y-2">
-        <Label htmlFor="notes">Notes (Optional)</Label>
+        <Label htmlFor="notes">Note (Opzionale)</Label>
         <Textarea
           id="notes"
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
-          placeholder="Share your thoughts about this dish..."
+          placeholder="Condividi i tuoi pensieri sul piatto..."
           rows={3}
         />
       </div>

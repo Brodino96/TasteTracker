@@ -24,8 +24,8 @@ export function RestaurantForm() {
     
     if (!user) {
       toast({
-        title: "Authentication error",
-        description: "You must be logged in to add a restaurant",
+        title: "Errore di autenticazione",
+        description: "Devi essere loggato per aggiungere un ristorante",
         variant: "destructive",
       });
       return;
@@ -78,8 +78,8 @@ export function RestaurantForm() {
       if (error) throw error;
 
       toast({
-        title: "Restaurant added",
-        description: "Your restaurant has been added successfully",
+        title: "Ristorante aggiunto",
+        description: "Il ristorante è stato aggiunto con successo",
       });
 
       // Navigate to the restaurant page
@@ -90,7 +90,7 @@ export function RestaurantForm() {
       }
     } catch (error: any) {
       toast({
-        title: "Error adding restaurant",
+        title: "Aggiunta ristorante fallita",
         description: error.message,
         variant: "destructive",
       });
@@ -102,15 +102,15 @@ export function RestaurantForm() {
   return (
     <Card className="max-w-2xl mx-auto">
       <CardHeader>
-        <CardTitle>Add Restaurant</CardTitle>
+        <CardTitle>Aggiungi ristorante</CardTitle>
         <CardDescription>
-          Add a new restaurant to start reviewing dishes
+          Aggiunti un nuovo ristorante per iniziare a recensire i piatti
         </CardDescription>
       </CardHeader>
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="name">Restaurant Name</Label>
+            <Label htmlFor="name">Nome Ristorante</Label>
             <Input
               id="name"
               value={name}
@@ -120,7 +120,7 @@ export function RestaurantForm() {
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="description">Description</Label>
+            <Label htmlFor="description">Descrizione</Label>
             <Textarea
               id="description"
               value={description}
@@ -130,7 +130,7 @@ export function RestaurantForm() {
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="address">Address</Label>
+            <Label htmlFor="address">Indirizzo</Label>
             <Input
               id="address"
               value={address}
@@ -140,7 +140,7 @@ export function RestaurantForm() {
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="image">Restaurant Image</Label>
+            <Label htmlFor="image">Immagine Ristorante</Label>
             <Input
               id="image"
               type="file"
@@ -152,7 +152,7 @@ export function RestaurantForm() {
               }}
             />
             <p className="text-xs text-muted-foreground">
-              Upload an image of the restaurant (optional)
+              Carica un immagine del ristorante (Opzionale)
             </p>
           </div>
         </CardContent>
